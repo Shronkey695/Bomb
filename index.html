@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+    </head>
+    <body>
+        <a-scene>
+        <a-camera>
+        <a-cursor fuse="true" fuse-timeout="1000"></a-cursor>   
+        </a-camera>
+        
+        <a-plane color="blue" width="20" height="20" rotation="-90 0 0" position="0 0 -4"></a-plane>
+        
+        <a-box id="box" color="red" position="1 1 -4"></a-box>
+        <a-box id="box2" color="purple" position="-1 1 -5"></a-box>
+        <a-box id="box3" color="purple" position="-4 1 -2"></a-box>
+         <a-box id="box4" color="purple" position="3 1 -2"></a-box>
+         <a-box id="box5" color="purple" position="-1 1 -5"></a-box>
+        <a-box id="box6" color="purple" position="-4 1 -2"></a-box>
+         <a-box id="box7" color="purple" position="3 1 -2"></a-box>
+         <a-box id="box8" color="purple" position="-1 1 -5"></a-box>
+        <a-box id="box9" color="purple" position="-4 1 -2"></a-box>
+         <a-box id="box10" color="purple" position="3 1 -2"></a-box>
+        </a-scene>
+        <script>
+    const scene = document.querySelector('a-scene');
+    const box = document.querySelector('#box');
+    const box2 = document.querySelector('#box2');
+    const box3 = document.querySelector('#box3');
+    const box4 = document.querySelector('#box4');
+     const box5 = document.querySelector('#box5');
+    const box6 = document.querySelector('#box6');
+    const box7 = document.querySelector('#box7');
+    const box8 = document.querySelector('#box8');
+    const box9 = document.querySelector('#box9');
+    const box10 = document.querySelector('#box10');
+    const purpleBoxes = [box2, box3, box4, box5, box6, box7, box8, box9, box10];
+    
+
+    const rand = (min, max) => min + Math.random() * (max - min);
+
+    
+    function moveElementToRandom(element) {
+      element.setAttribute('animation', {
+        property: 'position',
+        to: `${rand(-8, 8)} ${rand(0.5, 4)} ${rand(-10, 0)}`,
+        dur: 2000,
+        easing: 'easeInOutQuad'
+      });
+    }
+    
+     box.addEventListener('click', () => {
+      box.setAttribute('animation__scale', {
+        property: 'scale',
+        to: '10 10 10',
+        dur: 2000,
+        easing: 'easeOutQuad'
+      });
+    });
+   
+    purpleBoxes.forEach((b) => {
+  b.addEventListener('click', () => {
+    b.parentNode.removeChild(b); 
+  });
+  
+  b.addEventListener('animationcomplete', () => moveElementToRandom(b));
+});
+     
+                
+    
+    
+    
+
+
+
+
+    
+    box.addEventListener('animationcomplete', () => moveElementToRandom(box));
+    box2.addEventListener('animationcomplete', () => moveElementToRandom(box2));
+    box3.addEventListener('animationcomplete', () => moveElementToRandom(box3));
+    box4.addEventListener('animationcomplete', () => moveElementToRandom(box4));
+    box5.addEventListener('animationcomplete', () => moveElementToRandom(box5));
+    box6.addEventListener('animationcomplete', () => moveElementToRandom(box6));
+    box7.addEventListener('animationcomplete', () => moveElementToRandom(box7));
+    box8.addEventListener('animationcomplete', () => moveElementToRandom(box8));
+    box9.addEventListener('animationcomplete', () => moveElementToRandom(box9));
+    box10.addEventListener('animationcomplete', () => moveElementToRandom(box10));
+    
+
+   
+
+   
+    function startAllMovements() {
+      moveElementToRandom(box);
+      moveElementToRandom(box2);
+      moveElementToRandom(box3);
+      moveElementToRandom(box4);
+      moveElementToRandom(box5);
+      moveElementToRandom(box6);
+      moveElementToRandom(box7);
+       moveElementToRandom(box8);
+      moveElementToRandom(box9);
+      moveElementToRandom(box10);
+    }
+
+    if (scene.hasLoaded) {
+      startAllMovements();
+    } else {
+      scene.addEventListener('loaded', startAllMovements);
+    }
+  </script>
+</body>
+</html>
+    </body>
+</html>
